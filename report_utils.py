@@ -3,6 +3,8 @@ import base64
 import hashlib
 import json
 from sgx_structs._sgx_quote import SgxQuote
+from sgx_structs._sgx_report_data import SgxReportData
+import sgx_structs
 
 from cryptography.hazmat.primitives import hashes
 
@@ -14,9 +16,10 @@ def decode_response(res):
     data = base64.b64decode(isvEnclaveQuoteBody)
     sgx_quote = SgxQuote()
     sgx_quote.parse_from_bytes(data)
-    print(res.text)
-    print('')
-    print(sgx_quote)
+    #print(res.text)
+    #print(sgx_quote)
+    #sgx_report_data = hash_value + (b'\x00' * (SgxReportData.STRUCT_SIZE - len(hash_value)))
+    #print(sgx_report_data)
     print('')
 
     #print(sgx_quote.report_body.report_data.d.hex())
@@ -55,5 +58,5 @@ def decode_response(res):
 
     print (sgx_quote.report_body.report_data.d)
     '''
-    return report, sig, report_cert, report_ca
+    return report, sig, report_cert, report_ca, sgx_quote
 

@@ -1,11 +1,15 @@
 import urllib.parse
+import urllib.request
 import base64
 import json
 from sgx_structs._sgx_quote import SgxQuote
 
 def decode_response(res):
     # the report is the body of the response
-    report = res.text.encode('utf-8')
+    #report = res.text.encode('utf-8')
+    report = res.text.encode('utf-8') 
+    print(report)
+#    print(res)
     temp = json.loads (res.text)
     isvEnclaveQuoteBody = temp['isvEnclaveQuoteBody']
     data = base64.b64decode(isvEnclaveQuoteBody)
